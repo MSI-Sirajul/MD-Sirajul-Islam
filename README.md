@@ -58,14 +58,6 @@ This project is built with .
 
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%23F90355&size=27&lines=𝓜𝓓-𝓢𝓘𝓡𝓐𝓙𝓤𝓛-𝓘𝓢𝓛𝓐𝓜;+𝕚𝕋'𝕊+ℕ𝕠𝕥+𝕁𝕦𝕤𝕥+𝕄𝕪+ℕ𝕒𝕞𝕖;★彡[ɪᴛ'ꜱ+ᴀ+ʙʀᴀɴᴅ]彡★)](https://git.io/typing-svg)
- 
-
- 
-## 💕 MY SOCIAL MEDIA :
-
- ## 🌐 Socials:
- 
-[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://facebook.com/Sirajul26 ) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/Sirajul26 ) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/Sirajul26 ) [![Pinterest](https://img.shields.io/badge/Pinterest-%23E60023.svg?logo=Pinterest&logoColor=white)](https://pinterest.com/Sirajul26 ) [![TikTok](https://img.shields.io/badge/TikTok-%23000000.svg?logo=TikTok&logoColor=white)](https://tiktok.com/@its.sirajul01) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://youtube.com/@BasicHacker68) 
 
 ## My Skill🛠️
 
@@ -82,11 +74,7 @@ This project is built with .
 ![Adobe After Effects](https://img.shields.io/badge/Adobe%20After%20Effects-9999FF.svg?style=for-the-badge&logo=Adobe%20After%20Effects&logoColor=white)
 ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white) ![Proto.io](https://img.shields.io/badge/Proto.io-161637?style=for-the-badge&logo=proto.io&logoColor=00e5ff) ![Dribbble](https://img.shields.io/badge/Dribbble-EA4C89?style=for-the-badge&logo=dribbble&logoColor=white) ![GIT](https://img.shields.io/badge/Git-fc6d26?style=for-the-badge&logo=git&logoColor=white) ![LINUX](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)
 
-### Visit Now👉👉 [![](https://img.shields.io/github/followers/sirajul26?style=social)](https://github.com/sirajul26?tab=repositories)
-
-#### channel name
-
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=32&duration=10&pause=10&color=F70C22&background=000000&center=true&vCenter=true&width=250&lines=Basic+Hacker)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=32&duration=10&pause=10&color=F70C22&background=000000&center=true&vCenter=true&width=250&lines=MD+SIRAJUL+ISLAM)](https://git.io/typing-svg)
 
 
 ## I want to use a custom domain - is that possible?
