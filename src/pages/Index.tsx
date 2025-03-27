@@ -8,8 +8,8 @@ const Index = () => {
   
   const hobbies = [
     { title: t("programming"), description: "Developing innovative solutions", icon: "💻" },
-    { title: t("healthcare"), description: "Providing medical assistance", icon: "🏥" },
-    { title: t("electrical_engineering"), description: "Building electrical systems", icon: "⚡" },
+    { title: t("healthcare"), description: "Be a Professional Senior Stuff Nurse", icon: "🏥" },
+    { title: t("electrical_engineering"), description: "Building electrical Circute and iot device", icon: "⚡" },
     { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
   ];
 
