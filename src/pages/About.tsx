@@ -59,15 +59,23 @@ const About = () => {
 
   const education = [
     {
-      degree: "Personal Experience ",
-      institution: "Hobby",
-      year: "2016"
-    },
-    {
       degree: "Diploma Nursing. ",
       institution: "TMSS Nursing Institute",
       year: "2022 - Present"
     },
+    
+    {
+       degree: "Graphic Designer",
+       institution: "Unity Corporation",
+       year: "Mar-2022 - Aug-2022",
+    },
+     
+    {
+      degree: "Electrical Engineer",
+      institution: "Hobby",
+      year: "2016"
+    },
+
     {
       degree: "Basic Hacking Knowledge",
       institution: "Personal Practice only",
