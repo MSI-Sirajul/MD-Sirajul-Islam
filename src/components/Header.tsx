@@ -9,9 +9,10 @@ const Header: React.FC = () => {
   const { t } = useLanguage();
   
   const slogans = [
-    t("healthcare"),
-    t("programming"),
-    t("electrical_engineering")
+    t("Student Nurse"),
+    t("Graphic Desigher"),
+    t("Electrical Engineer")
+    t("Programmer")
   ];
 
   return (
