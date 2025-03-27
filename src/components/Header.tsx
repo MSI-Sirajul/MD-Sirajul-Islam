@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const slogans = [
     t("Student Nurse"),
     t("Graphic Desigher"),
-    t("Electrical Engineer")
+    t("Electrical Engineer"),
     t("Programmer")
   ];
 
