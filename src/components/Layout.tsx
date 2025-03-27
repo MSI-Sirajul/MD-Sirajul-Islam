@@ -2,10 +2,13 @@
 import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
+import { useFont } from "@/contexts/FontContext";
 
 const Layout: React.FC = () => {
+  const { font } = useFont();
+  
   return (
-    <div className="flex flex-col min-h-screen relative overflow-hidden">
+    <div className={`flex flex-col min-h-screen relative overflow-hidden ${font}`}>
       {/* Background decorative elements */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-violet-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: "2s" }}></div>
