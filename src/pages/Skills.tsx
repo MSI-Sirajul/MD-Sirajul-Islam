@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Code, Heart, Cpu, Shield, Bot, Terminal, Database, Tool } from "lucide-react";
+import { Code, Heart, Cpu, Shield, Bot, Terminal, Database, Wrench, Github } from "lucide-react";
 
 const Skills = () => {
   const skillCategories = [
@@ -51,7 +51,7 @@ const Skills = () => {
     },
     {
       title: "Mechanical Engineering",
-      icon: <Tool className="h-6 w-6 text-primary" />,
+      icon: <Wrench className="h-6 w-6 text-primary" />,
       skills: [
         "CAD Design",
         "Prototyping",
