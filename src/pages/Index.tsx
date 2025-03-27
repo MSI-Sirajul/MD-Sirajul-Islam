@@ -14,18 +14,19 @@ const Index = () => {
   ];
 
   const socialLinks = [
-    { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com" },
-    { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://linkedin.com" },
-    { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://twitter.com" },
-    { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://instagram.com" },
-    { name: "Email", icon: <Mail className="h-5 w-5" />, url: "mailto:example@mail.com" },
+    { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
+    { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
+    { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://x.com/its_sirajul16" },
+    { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://www.instagram.com/its.sirajul26/" },
+    { name: "Email", icon: <Mail className="h-5 w-5" />, url: "mailto:sirajul4516@gmail.com" },
   ];
 
   const activities = [
-    { title: "Hospital Volunteer", description: "Provided 500+ hours of patient care" },
-    { title: "Open Source Contribution", description: "Contributed to 10+ GitHub repositories" },
-    { title: "Workshop Host", description: "Led electrical engineering workshops" },
-    { title: "Security Researcher", description: "Identified vulnerabilities in web applications" }
+    { title: "Student Nurse", description: "Work 6+ Month with patient care" },
+    { title: "Graphic Design", description: "i'm a professional graphic design have 6+ month work expriance"},
+    { title: "Github Repository Developer", description: "Develop to 10+ usefull GitHub repositories" },
+    { title: "Repair And make Electrict circut", description: "Repair personal usase electrict device able to make iot and eletrict circut" },
+    { title: "Programming", description: "Build up basic android app and have basic ethical hacking Knowledge" }
   ];
 
   return (
