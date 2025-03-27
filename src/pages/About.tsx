@@ -18,54 +18,60 @@ const About = () => {
   const { t } = useLanguage();
   
   const socialLinks = [
-    { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com" },
-    { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://linkedin.com" },
-    { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://twitter.com" },
-    { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://instagram.com" }
+    { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
+    { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
+    { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://x.com/its_sirajul16" },
+    { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://www.instagram.com/its.sirajul26/" }
   ];
 
   const contactInfo = [
-    { icon: <Mail className="h-5 w-5" />, label: t("email"), value: "sirajul@example.com" },
-    { icon: <Phone className="h-5 w-5" />, label: t("phone"), value: "+1 234 567 890" },
-    { icon: <MapPin className="h-5 w-5" />, label: t("location"), value: "New York, USA" }
+    { icon: <Mail className="h-5 w-5" />, label: t("email"), value: "sirajul4516@gmail.com" },
+    { icon: <Phone className="h-5 w-5" />, label: t("phone"), value: "+880 1629-744516" },
+    { icon: <MapPin className="h-5 w-5" />, label: t("location"), value: "Chattgram, Bangladesh" }
   ];
 
   const experiences = [
     {
-      title: "Senior Healthcare Provider",
-      company: "Metro Hospital",
-      period: "2020 - Present",
-      description: "Providing specialized healthcare services and emergency response."
+      title: "Student Nusre",
+      company: "TMSS Nursing institute",
+      period: "2022 - Present",
+      description: Diploma in Nursing Science and Midwifery ."
     },
+		{
+			tittle: "Graphics Designer",
+			company: "Gazi-Laboratories unani Bangladesh",
+			period: "DEC-2022 - APR-2023",
+			description: "Graphic Designer and Computer Operator",
+		},
     {
       title: "Software Developer",
-      company: "Tech Innovations Inc.",
-      period: "2018 - 2020",
-      description: "Developed full-stack applications and maintained critical systems."
+      company: "Personal use Only (Hobby).",
+      period: "2018 - Present",
+      description: "Developed Basic android app for personal use."
     },
     {
       title: "Electrical Engineer",
-      company: "Power Systems Ltd.",
-      period: "2016 - 2018",
-      description: "Designed and implemented electrical systems for commercial projects."
+      company: "Personal Work experience",
+      period: "2016 - Present",
+      description: "Repairing electronic device's and able to set-up home electric supply."
     }
   ];
 
   const education = [
     {
-      degree: "Master's in Electrical Engineering",
-      institution: "Technical University",
+      degree: "Personal Experience ",
+      institution: "Hobby",
       year: "2016"
     },
     {
-      degree: "Bachelor's in Nursing",
-      institution: "Health Sciences University",
-      year: "2014"
+      degree: "Diploma Nursing. ",
+      institution: "TMSS Nursing Institute",
+      year: "2022 - Present"
     },
     {
-      degree: "Certification in Cybersecurity",
-      institution: "National Security Institute",
-      year: "2019"
+      degree: "Basic Hacking Knowledge",
+      institution: "Personal Practice only",
+      year: "2019 - Present"
     }
   ];
 
@@ -75,7 +81,7 @@ const About = () => {
         <div className="md:w-1/3">
           <div className="glass-morphism rounded-2xl overflow-hidden mb-6">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" 
+              src="/image/placeholder.svg" 
               alt="MD Sirajul Islam" 
               className="w-full aspect-square object-cover"
             />
@@ -118,14 +124,14 @@ const About = () => {
           <div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">MD Sirajul Islam</h1>
             <p className="text-muted-foreground">
-              A multidisciplinary professional with expertise in healthcare, programming, and engineering.
+              I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer .
             </p>
           </div>
           
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">{t("about_me")}</h2>
             <p className="text-muted-foreground">
-              I am a versatile professional with a unique combination of skills in healthcare, programming, and electrical engineering. 
+              I am a versatile professional with a unique combination of skills in healthcare, Graphics Design, programming, and electrical engineering. 
               With a passion for innovation and problem-solving, I bridge the gap between healthcare and technology 
               to create meaningful solutions that improve lives.
             </p>
