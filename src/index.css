@@ -73,7 +73,8 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased min-h-screen;
+    @apply bg-gradient-to-br from-background to-secondary/50 text-foreground antialiased min-h-screen;
+    background-attachment: fixed;
   }
   
   html {
@@ -108,6 +109,43 @@
   
   .certificate-image {
     @apply w-full h-64 object-cover transition-transform duration-500 hover:scale-110;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-600 to-violet-500 bg-clip-text text-transparent;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-card via-card to-secondary/80 backdrop-blur-sm;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-glow:hover {
+    @apply shadow-lg;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
   }
 }
 

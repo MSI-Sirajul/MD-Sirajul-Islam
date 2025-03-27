@@ -16,15 +16,15 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 p-4 md:p-6 glass-morphism z-50">
+    <header className="fixed top-0 left-0 right-0 p-4 md:p-6 glass-morphism z-50 animate-fade-in">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="rounded-full overflow-hidden w-12 h-12 border border-border/50 flex items-center justify-center bg-background/50">
-            <span className="text-lg font-semibold">MSI</span>
+          <div className="rounded-full overflow-hidden w-12 h-12 border-2 border-primary/50 flex items-center justify-center bg-background/80 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <span className="text-lg font-bold bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">MSI</span>
           </div>
           
           <div>
-            <h1 className="text-lg font-medium">MD Sirajul Islam</h1>
+            <h1 className="text-lg font-medium bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">MD Sirajul Islam</h1>
             <RotatingSlogan slogans={slogans} />
           </div>
         </div>

@@ -32,10 +32,10 @@ const RotatingSlogan: React.FC<RotatingSloganProps> = ({
   return (
     <div className="h-6 relative overflow-hidden">
       <span 
-        className={`absolute left-0 top-0 text-sm font-light tracking-wide transition-all duration-300 text-muted-foreground
+        className={`absolute left-0 top-0 text-sm font-light tracking-wide transition-all duration-300 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent
         ${isVisible ? 'opacity-100 transform-none' : 'opacity-0 -translate-y-2'}`}
       >
-        "{slogans[currentIndex]}"
+        ""{slogans[currentIndex]}""
       </span>
     </div>
   );
