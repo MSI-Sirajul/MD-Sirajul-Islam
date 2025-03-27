@@ -1,9 +1,11 @@
 
 import React, { useState } from "react";
 import { Download } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Certificates = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { t } = useLanguage();
   
   const certificates = [
     {
@@ -66,10 +68,9 @@ const Certificates = () => {
   return (
     <div className="page-transition space-y-8">
       <section className="space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight">My Certificates</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t("my_certificates")}</h1>
         <p className="text-muted-foreground max-w-3xl">
-          These certificates represent my commitment to continuous learning and professional development
-          across healthcare, technology, and engineering disciplines.
+          {t("certificates_description")}
         </p>
       </section>
 
@@ -99,7 +100,7 @@ const Certificates = () => {
                 className="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border border-border bg-background hover:bg-background/80 transition-colors"
               >
                 <Download className="h-4 w-4" />
-                <span>Download</span>
+                <span>{t("download")}</span>
               </button>
             </div>
           </div>

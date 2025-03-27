@@ -2,16 +2,18 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MoreVertical, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   const routes = [
-    { name: "Home", path: "/" },
-    { name: "Skills", path: "/skills" },
-    { name: "Certificates", path: "/certificates" },
-    { name: "About", path: "/about" }
+    { name: t("home"), path: "/" },
+    { name: t("skills"), path: "/skills" },
+    { name: t("certificates"), path: "/certificates" },
+    { name: t("about"), path: "/about" }
   ];
 
   const toggleMenu = () => setIsOpen(prev => !prev);

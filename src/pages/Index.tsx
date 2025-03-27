@@ -1,13 +1,16 @@
 
 import React from "react";
 import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
+  const { t } = useLanguage();
+  
   const hobbies = [
-    { title: "Programming", description: "Developing innovative solutions", icon: "💻" },
-    { title: "Healthcare", description: "Providing medical assistance", icon: "🏥" },
-    { title: "Engineering", description: "Building electrical systems", icon: "⚡" },
-    { title: "Ethical Hacking", description: "Discovering security vulnerabilities", icon: "🔐" }
+    { title: t("programming"), description: "Developing innovative solutions", icon: "💻" },
+    { title: t("healthcare"), description: "Providing medical assistance", icon: "🏥" },
+    { title: t("electrical_engineering"), description: "Building electrical systems", icon: "⚡" },
+    { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
   ];
 
   const socialLinks = [
@@ -29,7 +32,7 @@ const Index = () => {
     <div className="page-transition space-y-12">
       <section className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Welcome</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{t("welcome")}</h2>
           <p className="text-muted-foreground">
             I'm a multidisciplinary professional with expertise in healthcare, programming, and electrical engineering.
           </p>
@@ -46,11 +49,9 @@ const Index = () => {
           
           <div className="flex flex-col justify-between">
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">About Me</h3>
+              <h3 className="text-xl font-semibold">{t("about_me")}</h3>
               <p className="text-muted-foreground">
-                I combine my passion for healthcare with technical skills in programming and 
-                electrical engineering to create innovative solutions. My diverse background 
-                allows me to approach problems from unique angles.
+                {t("about_description")}
               </p>
             </div>
             
@@ -73,7 +74,7 @@ const Index = () => {
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight">My Interests</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">{t("my_interests")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {hobbies.map((hobby) => (
             <div key={hobby.title} className="p-6 glass-morphism rounded-xl hover-scale">
@@ -86,7 +87,7 @@ const Index = () => {
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight">Activity Highlights</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">{t("activity_highlights")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {activities.map((activity) => (
             <div key={activity.title} className="p-6 glass-morphism rounded-xl">

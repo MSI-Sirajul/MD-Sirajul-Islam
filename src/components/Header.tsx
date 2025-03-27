@@ -3,12 +3,16 @@ import React from "react";
 import ThemeToggle from "./ThemeToggle";
 import RotatingSlogan from "./RotatingSlogan";
 import Navigation from "./Navigation";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header: React.FC = () => {
+  const { t } = useLanguage();
+  
   const slogans = [
-    "Health care provider",
-    "Programmer",
-    "Electrical engineer"
+    t("healthcare"),
+    t("programming"),
+    t("electrical_engineering")
   ];
 
   return (
@@ -26,6 +30,7 @@ const Header: React.FC = () => {
         </div>
         
         <div className="flex items-center gap-4">
+          <LanguageToggle />
           <ThemeToggle />
           <Navigation />
         </div>

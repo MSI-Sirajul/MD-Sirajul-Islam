@@ -1,11 +1,14 @@
 
 import React from "react";
 import { Code, Heart, Cpu, Shield, Bot, Terminal, Database, Wrench, Github } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Skills = () => {
+  const { t } = useLanguage();
+  
   const skillCategories = [
     {
-      title: "Healthcare",
+      title: t("healthcare"),
       icon: <Heart className="h-6 w-6 text-primary" />,
       skills: [
         "Patient Care",
@@ -16,7 +19,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Programming",
+      title: t("programming"),
       icon: <Code className="h-6 w-6 text-primary" />,
       skills: [
         "JavaScript/TypeScript",
@@ -28,7 +31,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Electrical Engineering",
+      title: t("electrical_engineering"),
       icon: <Cpu className="h-6 w-6 text-primary" />,
       skills: [
         "Circuit Design",
@@ -39,7 +42,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Ethical Hacking",
+      title: t("ethical_hacking"),
       icon: <Shield className="h-6 w-6 text-primary" />,
       skills: [
         "Penetration Testing",
@@ -50,7 +53,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Mechanical Engineering",
+      title: t("mechanical_engineering"),
       icon: <Wrench className="h-6 w-6 text-primary" />,
       skills: [
         "CAD Design",
@@ -61,7 +64,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Microelectronics",
+      title: t("microelectronics"),
       icon: <Bot className="h-6 w-6 text-primary" />,
       skills: [
         "IC Design",
@@ -72,7 +75,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Development Tools",
+      title: t("development_tools"),
       icon: <Terminal className="h-6 w-6 text-primary" />,
       skills: [
         "Git/GitHub",
@@ -83,7 +86,7 @@ const Skills = () => {
       ]
     },
     {
-      title: "Data Management",
+      title: t("data_management"),
       icon: <Database className="h-6 w-6 text-primary" />,
       skills: [
         "Database Design",
@@ -98,10 +101,9 @@ const Skills = () => {
   return (
     <div className="page-transition space-y-8">
       <section className="space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight">My Skills</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t("my_skills")}</h1>
         <p className="text-muted-foreground max-w-3xl">
-          As a multidisciplinary professional, I've developed expertise across various fields including healthcare, 
-          programming, engineering, and cybersecurity. Below are the key skills I've acquired throughout my career.
+          {t("skills_description")}
         </p>
       </section>
 
@@ -132,10 +134,9 @@ const Skills = () => {
       </section>
 
       <section className="mt-10 glass-morphism rounded-2xl p-6">
-        <h2 className="text-2xl font-semibold mb-4">GitHub Repositories</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t("github_repositories")}</h2>
         <p className="text-muted-foreground mb-6">
-          I've built and contributed to numerous repositories showcasing my technical skills and problem-solving abilities.
-          My projects range from healthcare applications to electronic design tools and security utilities.
+          {t("github_description")}
         </p>
         
         <a 
@@ -145,7 +146,7 @@ const Skills = () => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-background hover:bg-background/80 transition-colors"
         >
           <Github className="h-5 w-5" />
-          <span>View My GitHub Profile</span>
+          <span>{t("view_github")}</span>
         </a>
       </section>
     </div>

@@ -12,8 +12,11 @@ import {
   BookOpen,
   Award
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
+  const { t } = useLanguage();
+  
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com" },
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://linkedin.com" },
@@ -22,9 +25,9 @@ const About = () => {
   ];
 
   const contactInfo = [
-    { icon: <Mail className="h-5 w-5" />, label: "Email", value: "sirajul@example.com" },
-    { icon: <Phone className="h-5 w-5" />, label: "Phone", value: "+1 234 567 890" },
-    { icon: <MapPin className="h-5 w-5" />, label: "Location", value: "New York, USA" }
+    { icon: <Mail className="h-5 w-5" />, label: t("email"), value: "sirajul@example.com" },
+    { icon: <Phone className="h-5 w-5" />, label: t("phone"), value: "+1 234 567 890" },
+    { icon: <MapPin className="h-5 w-5" />, label: t("location"), value: "New York, USA" }
   ];
 
   const experiences = [
@@ -94,7 +97,7 @@ const About = () => {
           </div>
           
           <div className="glass-morphism rounded-xl p-5 space-y-4">
-            <h3 className="text-lg font-medium">Contact Information</h3>
+            <h3 className="text-lg font-medium">{t("contact_information")}</h3>
             <ul className="space-y-3">
               {contactInfo.map((info) => (
                 <li key={info.label} className="flex items-center gap-3">
@@ -120,7 +123,7 @@ const About = () => {
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold">About Me</h2>
+            <h2 className="text-2xl font-semibold">{t("about_me")}</h2>
             <p className="text-muted-foreground">
               I am a versatile professional with a unique combination of skills in healthcare, programming, and electrical engineering. 
               With a passion for innovation and problem-solving, I bridge the gap between healthcare and technology 
@@ -136,7 +139,7 @@ const About = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Award className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">Experience</h2>
+              <h2 className="text-2xl font-semibold">{t("experience")}</h2>
             </div>
             <div className="space-y-4">
               {experiences.map((exp) => (
@@ -152,7 +155,7 @@ const About = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">Education</h2>
+              <h2 className="text-2xl font-semibold">{t("education")}</h2>
             </div>
             <div className="space-y-3">
               {education.map((edu) => (
