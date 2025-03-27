@@ -35,7 +35,7 @@ const Index = () => {
         <div className="space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">{t("welcome")}</h2>
           <p className="text-muted-foreground">
-            I'm a multidisciplinary professional with expertise in healthcare, programming, and electrical engineering.
+            I'm a multi talented person, i'm a •student nurse •Professional Graphics Designer •Electrical engineer •Programmer.
           </p>
         </div>
 
