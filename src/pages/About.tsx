@@ -32,17 +32,17 @@ const About = () => {
 
   const experiences = [
     {
-      title: "Student Nusre",
+      title: "Student Nurse",
       company: "TMSS Nursing institute",
       period: "2022 - Present",
-      description: Diploma in Nursing Science and Midwifery ."
+      description: "Diploma in Nursing Science and Midwifery."
     },
-		{
-			tittle: "Graphics Designer",
-			company: "Gazi-Laboratories unani Bangladesh",
-			period: "DEC-2022 - APR-2023",
-			description: "Graphic Designer and Computer Operator",
-		},
+    {
+      title: "Graphics Designer",
+      company: "Gazi-Laboratories unani Bangladesh",
+      period: "DEC-2022 - APR-2023",
+      description: "Graphic Designer and Computer Operator"
+    },
     {
       title: "Software Developer",
       company: "Personal use Only (Hobby).",
