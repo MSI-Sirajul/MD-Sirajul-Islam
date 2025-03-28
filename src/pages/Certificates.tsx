@@ -9,7 +9,7 @@ const Certificates = () => {
   
   const certificates = [
     {
-      title: "Advanced Healthcare Provider Certification",
+      title: "SSC",
       image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28",
       date: "2023"
     },
