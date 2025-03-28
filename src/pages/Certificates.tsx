@@ -20,7 +20,7 @@ const Certificates = () => {
     },
     {
       title: "Chairman Certificate",
-      image: "/src/images/Screenshot_2022_1030_123921.png",
+      image: "https://sirajul26.imgix.net/chairman.png",
       date: "2022"
     },
     {
@@ -30,7 +30,7 @@ const Certificates = () => {
     },
     {
       title: "National ID Card (NID)",
-      image: "/src/images/Screenshot_2022_1030_180123.png",
+      image: "https://sirajul26.imgix.net/nid.png",
       date: "2021"
     },
     {
