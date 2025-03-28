@@ -14,6 +14,14 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+  <div className="md:w-2/3 space-y-8">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight mb-2">MD Sirajul Islam</h1>
+            <p className="text-muted-foreground">
+              I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer .
+            </p>
+          </div>
+          
 const About = () => {
   const { t } = useLanguage();
   
@@ -63,16 +71,19 @@ const About = () => {
       institution: "TMSS Nursing Institute",
       year: "2022 - Present"
     },
+    
     {
-      degree: "Graphic Designer",
-      institution: "Unity Corporation",
-      year: "Mar-2022 - Aug-2022"
+       degree: "Graphic Designer",
+       institution: "Unity Corporation",
+       year: "Mar-2022 - Aug-2022",
     },
+     
     {
       degree: "Electrical Engineer",
       institution: "Hobby",
       year: "2016"
     },
+
     {
       degree: "Basic Hacking Knowledge",
       institution: "Personal Practice only",
@@ -86,7 +97,7 @@ const About = () => {
         <div className="md:w-1/3">
           <div className="glass-morphism rounded-2xl overflow-hidden mb-6">
             <img 
-              src="/images/logo.png" 
+              src="https://raw.githubusercontent.com/MSI-Sirajul/MD-Sirajul-Islam/refs/heads/main/src/images/1711088129469.jpg?token=GHSAT0AAAAAADBCYSMJAYBHPLJK7XWUSL22Z7GRG3A" 
               alt="MD Sirajul Islam" 
               className="w-full aspect-square object-cover"
             />
@@ -125,13 +136,6 @@ const About = () => {
           </div>
         </div>
         
-        <div className="md:w-2/3 space-y-8">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight mb-2">MD Sirajul Islam</h1>
-            <p className="text-muted-foreground">
-              I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer .
-            </p>
-          </div>
           
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">{t("about_me")}</h2>
