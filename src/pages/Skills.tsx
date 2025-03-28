@@ -8,7 +8,7 @@ const Skills = () => {
   
   const skillCategories = [
     {
-      title: t("healthcare"),
+      title: t("Nursing Practice"),
       icon: <Heart className="h-6 w-6 text-primary" />,
       skills: [
         "Patient Care",
@@ -19,30 +19,28 @@ const Skills = () => {
       ]
     },
     {
-      title: t("programming"),
+      title: t("Programming Knowledge"),
       icon: <Code className="h-6 w-6 text-primary" />,
       skills: [
         "JavaScript/TypeScript",
+        "java",
         "Python",
-        "React",
-        "Node.js",
         "HTML/CSS",
-        "SQL"
       ]
     },
     {
-      title: t("electrical_engineering"),
+      title: t("Electrical_engineering"),
       icon: <Cpu className="h-6 w-6 text-primary" />,
       skills: [
-        "Circuit Design",
-        "Microcontrollers",
-        "Signal Processing",
-        "Power Systems",
+        "Circuit Repair",
+        "Electric Device Repair",
+        "Circuit Making",
+        "Home Electrical Wireing",
         "PCB Design"
       ]
     },
     {
-      title: t("ethical_hacking"),
+      title: t("Ethical_hacking"),
       icon: <Shield className="h-6 w-6 text-primary" />,
       skills: [
         "Penetration Testing",
@@ -53,47 +51,44 @@ const Skills = () => {
       ]
     },
     {
-      title: t("mechanical_engineering"),
+      title: t("Graphic Design"),
       icon: <Wrench className="h-6 w-6 text-primary" />,
       skills: [
-        "CAD Design",
-        "Prototyping",
-        "Material Analysis",
-        "Structural Engineering",
-        "Thermodynamics"
+        "Adobe Photoshop",
+        "Adobe illustator",
+        "Adobe After Effect",
+        "Adobe Acrobat"
       ]
     },
     {
-      title: t("microelectronics"),
-      icon: <Bot className="h-6 w-6 text-primary" />,
+      title: t("Office Application"),
+      icon: <Wrench className="h-6 w-6 text-primary" />,
       skills: [
-        "IC Design",
-        "Embedded Systems",
-        "FPGA Programming",
-        "Sensor Integration",
-        "IoT Development"
+        "Microdoft Woard",
+        "Microsoft Excel",
+        "Microsoft Powerpoint"
       ]
     },
     {
-      title: t("development_tools"),
+      title: t("Development_tools"),
       icon: <Terminal className="h-6 w-6 text-primary" />,
       skills: [
         "Git/GitHub",
-        "Docker",
-        "CI/CD Pipelines",
+        "Termux",
+        "AIDE",
         "VS Code",
-        "Testing Frameworks"
+        "Línux"
       ]
     },
     {
-      title: t("data_management"),
+      title: t("Operating System"),
       icon: <Database className="h-6 w-6 text-primary" />,
       skills: [
-        "Database Design",
-        "Data Analysis",
-        "MongoDB",
-        "PostgreSQL",
-        "Data Visualization"
+        "Wnidows",
+        "Linux",
+        "Android",
+        "Mac OS",
+        "DOS"
       ]
     }
   ];
@@ -140,7 +135,7 @@ const Skills = () => {
         </p>
         
         <a 
-          href="https://github.com" 
+          href="https://github.com/MSI-Sirajul/" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-background hover:bg-background/80 transition-colors"
