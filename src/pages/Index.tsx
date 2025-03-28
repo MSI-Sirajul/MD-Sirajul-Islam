@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, Instagram, Facebook } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
@@ -10,7 +9,7 @@ const Index = () => {
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
     { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://x.com/its_sirajul16" },
-    { name: "facebook". icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
+    { name: "Facebook", icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
     { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://www.instagram.com/its.sirajul26/" },
     { name: "Email", icon: <Mail className="h-5 w-5" />, url: "mailto:sirajul4516@gmail.com" },
   ];
@@ -28,7 +27,7 @@ const Index = () => {
     { title: t("healthcare"), description: "Be a Professional Senior Stuff Nurse", icon: "🏥" },
     { title: t("electrical_engineering"), description: "Building electrical Circute and iot device", icon: "⚡" },
     { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
-    ];
+  ];
 
   return (
     <div className="page-transition space-y-12">
