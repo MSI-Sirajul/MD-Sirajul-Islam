@@ -14,6 +14,14 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+  <div className="md:w-2/3 space-y-8">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight mb-2">MD Sirajul Islam</h1>
+            <p className="text-muted-foreground">
+              I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer .
+            </p>
+          </div>
+          
 const About = () => {
   const { t } = useLanguage();
   
@@ -128,13 +136,6 @@ const About = () => {
           </div>
         </div>
         
-        <div className="md:w-2/3 space-y-8">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight mb-2">MD Sirajul Islam</h1>
-            <p className="text-muted-foreground">
-              I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer .
-            </p>
-          </div>
           
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">{t("about_me")}</h2>
