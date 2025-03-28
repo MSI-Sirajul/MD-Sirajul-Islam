@@ -5,13 +5,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
   const { t } = useLanguage();
-  
-  const hobbies = [
-    { title: t("programming"), description: "Developing innovative solutions", icon: "💻" },
-    { title: t("healthcare"), description: "Be a Professional Senior Stuff Nurse", icon: "🏥" },
-    { title: t("electrical_engineering"), description: "Building electrical Circute and iot device", icon: "⚡" },
-    { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
-  ];
 
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
@@ -28,6 +21,13 @@ const Index = () => {
     { title: "Repair And make Electrict circut", description: "Repair personal usase electrict device able to make iot and eletrict circut" },
     { title: "Programming", description: "Build up basic android app and have basic ethical hacking Knowledge" }
   ];
+  
+  const hobbies = [
+    { title: t("programming"), description: "Developing innovative solutions", icon: "💻" },
+    { title: t("healthcare"), description: "Be a Professional Senior Stuff Nurse", icon: "🏥" },
+    { title: t("electrical_engineering"), description: "Building electrical Circute and iot device", icon: "⚡" },
+    { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
+    ];
 
   return (
     <div className="page-transition space-y-12">
