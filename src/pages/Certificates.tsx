@@ -10,12 +10,12 @@ const Certificates = () => {
   const certificates = [
     {
       title: "Secondery school certificate (SSC)",
-      image: "/src/images/Screenshot_2022_1030_123600.png",
+      image: "https://sirajul26.imgix.net/ssc2.png",
       date: "2023"
     },
     {
       title: "Higher Secondery Certificate (HSC)",
-      image: "/src/images/Screenshot_2022_1030_123704.png",
+      image: "https://sirajul26.imgix.net/hsc.png",
       date: "2022"
     },
     {
@@ -25,7 +25,7 @@ const Certificates = () => {
     },
     {
       title: "Graphic Designer",
-      image: "/src/images/Screenshot_2022_1030_141711.png",
+      image: "https://sirajul26.imgix.net/graphic.png",
       date: "2021"
     },
     {
