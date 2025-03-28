@@ -89,7 +89,7 @@ const About = () => {
         <div className="md:w-1/3">
           <div className="glass-morphism rounded-2xl overflow-hidden mb-6">
             <img 
-              src="https://raw.githubusercontent.com/MSI-Sirajul/MD-Sirajul-Islam/refs/heads/main/src/images/1711088129469.jpg?token=GHSAT0AAAAAADBCYSMJAYBHPLJK7XWUSL22Z7GRG3A" 
+              src="/src/images/1711088129469.jpg" 
               alt="MD Sirajul Islam" 
               className="w-full aspect-square object-cover"
             />
