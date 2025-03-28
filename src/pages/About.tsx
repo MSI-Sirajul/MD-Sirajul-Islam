@@ -21,6 +21,7 @@ const About = () => {
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
+    { name: "facebook". icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
     { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://x.com/its_sirajul16" },
     { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://www.instagram.com/its.sirajul26/" }
   ];
