@@ -42,7 +42,7 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="glass-morphism rounded-2xl overflow-hidden h-80">
             <img 
-              src="/images/banner.jpg" 
+              src="https://sirajul26.imgix.net/msi-2.png" 
               alt="Banner" 
               className="w-full h-full object-cover"
             />
