@@ -89,7 +89,7 @@ const About = () => {
         <div className="md:w-1/3">
           <div className="glass-morphism rounded-2xl overflow-hidden mb-6">
             <img 
-              src="/image/placeholder.svg" 
+              src="/images/logo.png" 
               alt="MD Sirajul Islam" 
               className="w-full aspect-square object-cover"
             />
