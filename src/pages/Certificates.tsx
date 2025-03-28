@@ -9,32 +9,32 @@ const Certificates = () => {
   
   const certificates = [
     {
-      title: "SSC",
+      title: "Secondery school certificate (SSC)",
       image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28",
       date: "2023"
     },
     {
-      title: "Full Stack Web Development",
+      title: "Higher Secondery Certificate (HSC)",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
       date: "2022"
     },
     {
-      title: "Ethical Hacking & Cybersecurity",
+      title: "Chairman Certificate",
       image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de",
       date: "2022"
     },
     {
-      title: "Advanced Electrical Engineering",
+      title: "Graphic Designer",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
       date: "2021"
     },
     {
-      title: "Microelectronics Design",
+      title: "National ID Card (NID)",
       image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
       date: "2021"
     },
     {
-      title: "IoT Development",
+      title: "Birth Certificate",
       image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f",
       date: "2020"
     },
