@@ -20,7 +20,7 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="rounded-full overflow-hidden w-12 h-12 border-2 border-primary/50 flex items-center justify-center bg-background/80 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
-            <img src="/src/pages/images/logo.gif" alt="MSI" className="w-full h-full object-cover" />
+            <img src="https://sirajul26.imgix.net/logo2.gif" alt="MSI" className="w-full h-full object-cover" />
           </div>
           
           <div>
