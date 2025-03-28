@@ -10,52 +10,52 @@ const Certificates = () => {
   const certificates = [
     {
       title: "Secondery school certificate (SSC)",
-      image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28",
+      image: "/src/images/Screenshot_2022_1030_123600.png",
       date: "2023"
     },
     {
       title: "Higher Secondery Certificate (HSC)",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+      image: "/src/images/Screenshot_2022_1030_123704.png",
       date: "2022"
     },
     {
       title: "Chairman Certificate",
-      image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de",
+      image: "/src/images/Screenshot_2022_1030_123921.png",
       date: "2022"
     },
     {
       title: "Graphic Designer",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      image: "/src/images/Screenshot_2022_1030_141711.png",
       date: "2021"
     },
     {
       title: "National ID Card (NID)",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
+      image: "/src/images/Screenshot_2022_1030_180123.png",
       date: "2021"
     },
     {
       title: "Birth Certificate",
-      image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f",
+      image: "/src/images/Screenshot_2022_1030_180202.png",
       date: "2020"
     },
     {
       title: "Python for Data Science",
-      image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
+      image: "/src/images/download~2.png",
       date: "2020"
     },
     {
       title: "Cloud Computing",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8",
+      image: "/src/images/1711088129469.jpg",
       date: "2019"
     },
     {
       title: "Network Security Fundamentals",
-      image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de",
+      image: "/src/images/lv_0_20241203222524.gif",
       date: "2019"
     },
     {
       title: "Mobile App Development",
-      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3",
+      image: "/src/images/Google-Avater.gif",
       date: "2018"
     }
   ];
