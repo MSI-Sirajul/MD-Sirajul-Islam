@@ -1,5 +1,5 @@
 import React from "react";
-import { Github, Linkedin, Mail, Twitter, Instagram, Facebook } from "lucide-react";
+import { Github, Linkedin, Mail, Tiktok, Telegram, Facebook } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
@@ -8,9 +8,9 @@ const Index = () => {
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
-    { name: "Twitter", icon: <Twitter className="h-5 w-5" />, url: "https://x.com/its_sirajul16" },
+    { name: "Tiktok", icon: <Tiktok className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" },
     { name: "Facebook", icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
-    { name: "Instagram", icon: <Instagram className="h-5 w-5" />, url: "https://www.instagram.com/its.sirajul26/" },
+    { name: "Telegram", icon: <Telegram className="h-5 w-5" />, url: "https://t.me/tech_master26" },
     { name: "Email", icon: <Mail className="h-5 w-5" />, url: "mailto:sirajul4516@gmail.com" },
   ];
 
