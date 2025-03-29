@@ -1,13 +1,12 @@
-
 import React from "react";
 import { 
   Github, 
   Linkedin,
-  Tiktok,
+  Music,
   Twitter, 
   Instagram,
-  Telegram,
-  Facebook, // Changed from lowercase to uppercase
+  MessageCircle,
+  Facebook,
   Mail, 
   Phone, 
   MapPin, 
@@ -23,9 +22,9 @@ const About = () => {
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
-    { name: "Facebook", icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" }, // Fixed dot to comma and lowercase to uppercase
-    { name: "Telegram", icon: <Telegram className="h-5 w-5" />, url: "https://t.me/tech_master26" },
-    { name: "Tiktok", icon: <Tiktok className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" }
+    { name: "Facebook", icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
+    { name: "Telegram", icon: <MessageCircle className="h-5 w-5" />, url: "https://t.me/tech_master26" },
+    { name: "Tiktok", icon: <Music className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" }
   ];
 
   const contactInfo = [

@@ -1,5 +1,5 @@
 import React from "react";
-import { Github, Linkedin, Mail, Telegram, Facebook, Music } from "lucide-react";
+import { Github, Linkedin, Mail, Facebook, Music, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
@@ -10,7 +10,7 @@ const Index = () => {
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
     { name: "TikTok", icon: <Music className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" },
     { name: "Facebook", icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
-    { name: "Telegram", icon: <Telegram className="h-5 w-5" />, url: "https://t.me/tech_master26" },
+    { name: "Telegram", icon: <MessageCircle className="h-5 w-5" />, url: "https://t.me/tech_master26" },
     { name: "Email", icon: <Mail className="h-5 w-5" />, url: "mailto:sirajul4516@gmail.com" },
   ];
 
