@@ -7,22 +7,34 @@ type EditableContentProps = {
   onSave?: (value: string) => void;
   className?: string;
   as?: keyof JSX.IntrinsicElements;
+  id?: string;
 };
 
 const EditableContent = ({ 
   initialValue, 
-  onSave, 
+  onSave,
   className = "", 
-  as: Component = "div" 
+  as: Component = "div",
+  id = `content-${Math.random().toString(36).substring(2, 9)}` // Generate a random ID if none provided
 }: EditableContentProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(initialValue);
-  const { isEditMode } = useEdit();
+  const { isEditMode, updateContent } = useEdit();
   const inputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
       inputRef.current.focus();
+      // Place cursor at the end of the content
+      const selection = window.getSelection();
+      const range = document.createRange();
+      if (selection && inputRef.current.childNodes.length > 0) {
+        const lastNode = inputRef.current.childNodes[inputRef.current.childNodes.length - 1];
+        range.setStartAfter(lastNode);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
     }
   }, [isEditing]);
 
@@ -31,15 +43,20 @@ const EditableContent = ({
   }, [initialValue]);
 
   const handleClick = () => {
-    if (isEditMode) {
+    if (isEditMode && !isEditing) {
       setIsEditing(true);
     }
   };
 
   const handleBlur = () => {
-    setIsEditing(false);
-    if (onSave && content !== initialValue) {
-      onSave(content);
+    if (isEditing) {
+      setIsEditing(false);
+      if (content !== initialValue) {
+        if (onSave) {
+          onSave(content);
+        }
+        updateContent(id, content);
+      }
     }
   };
 
@@ -47,6 +64,10 @@ const EditableContent = ({
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleBlur();
+    }
+    if (e.key === 'Escape') {
+      setIsEditing(false);
+      setContent(initialValue); // Reset to initial content if ESC
     }
   };
 
@@ -62,7 +83,8 @@ const EditableContent = ({
       onKeyDown={handleKeyDown}
       dangerouslySetInnerHTML={{ __html: content }}
       onInput={(e) => setContent(e.currentTarget.textContent || '')}
-      className={`${className} outline-dashed outline-2 outline-primary bg-primary/5 p-1`}
+      className={`${className} outline-dashed outline-2 outline-primary bg-primary/5 p-1 rounded`}
+      aria-label="Edit content"
     />
   ) : (
     <Component 

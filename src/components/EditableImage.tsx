@@ -1,19 +1,27 @@
 
 import React, { useState, useRef } from 'react';
 import { useEdit } from '@/contexts/EditContext';
-import { Camera, Loader2 } from 'lucide-react';
+import { Camera, Loader2, Image } from 'lucide-react';
 
 type EditableImageProps = {
   src: string;
   alt: string;
   className?: string;
   onSave?: (file: File) => Promise<string>;
+  id?: string;
 };
 
-const EditableImage = ({ src, alt, className = "", onSave }: EditableImageProps) => {
-  const { isEditMode } = useEdit();
+const EditableImage = ({ 
+  src, 
+  alt, 
+  className = "",
+  onSave,
+  id = `image-${Math.random().toString(36).substring(2, 9)}`
+}: EditableImageProps) => {
+  const { isEditMode, updateImage } = useEdit();
   const [currentSrc, setCurrentSrc] = useState(src);
   const [isUploading, setIsUploading] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageClick = () => {
@@ -26,16 +34,18 @@ const EditableImage = ({ src, alt, className = "", onSave }: EditableImageProps)
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // For now, we're just showing a preview without actual upload
-    // In a future implementation, this will upload to Supabase
     setIsUploading(true);
     
     try {
+      // Create a preview for immediate feedback
       const objectUrl = URL.createObjectURL(file);
       setCurrentSrc(objectUrl);
       
+      // Save the image through the context
+      const newUrl = await updateImage(id, file);
+      
+      // If onSave prop is provided, also call that
       if (onSave) {
-        // This is where we'd actually upload and save the URL
         await onSave(file);
       }
     } catch (error) {
@@ -50,28 +60,49 @@ const EditableImage = ({ src, alt, className = "", onSave }: EditableImageProps)
   }
 
   return (
-    <div className="relative group">
+    <div 
+      className="relative group" 
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <input
         type="file"
         ref={fileInputRef}
         onChange={handleImageChange}
         accept="image/*"
         className="hidden"
+        aria-label="Upload image"
       />
       <img 
         src={currentSrc} 
         alt={alt} 
-        className={`${className} ${isEditMode ? 'cursor-pointer hover:opacity-75 transition-opacity' : ''}`} 
+        className={`${className} ${isEditMode ? 'cursor-pointer transition-opacity' : ''} ${isHovering ? 'opacity-75' : ''}`} 
         onClick={handleImageClick} 
       />
       {isEditMode && !isUploading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Camera className="text-white h-8 w-8" />
+        <div 
+          className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+          onClick={handleImageClick}
+        >
+          <div className="bg-black/60 rounded-full p-3 transform scale-90 hover:scale-100 transition-transform">
+            <Camera className="text-white h-8 w-8" />
+          </div>
         </div>
       )}
       {isUploading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-          <Loader2 className="text-white h-8 w-8 animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-2">
+            <Loader2 className="text-white h-8 w-8 animate-spin" />
+            <p className="text-white text-sm">Uploading...</p>
+          </div>
+        </div>
+      )}
+      {!currentSrc && isEditMode && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/10 border-2 border-dashed border-gray-300">
+          <div className="flex flex-col items-center gap-2">
+            <Image className="h-8 w-8 text-gray-400" />
+            <p className="text-sm text-gray-500">Click to add image</p>
+          </div>
         </div>
       )}
     </div>

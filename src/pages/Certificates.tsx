@@ -1,11 +1,14 @@
 
 import React, { useState } from "react";
-import { Download } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import EditableImage from "@/components/EditableImage";
+import EditableContent from "@/components/EditableContent";
+import { useEdit } from "@/contexts/EditContext";
 
 const Certificates = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { t } = useLanguage();
+  const { isEditMode } = useEdit();
   
   const certificates = [
     {
@@ -60,18 +63,20 @@ const Certificates = () => {
     }
   ];
 
-  const handleDownload = (title: string) => {
-    // In a real app, this would trigger the certificate download
-    alert(`Downloading certificate: ${title}`);
-  };
-
   return (
     <div className="page-transition space-y-8">
       <section className="space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight">{t("my_certificates")}</h1>
-        <p className="text-muted-foreground max-w-3xl">
-          {t("certificates_description")}
-        </p>
+        <EditableContent 
+          as="h1"
+          initialValue={t("my_certificates")} 
+          className="text-3xl font-bold tracking-tight"
+          onSave={(value) => console.log("Saving:", value)}
+        />
+        <EditableContent
+          initialValue={t("certificates_description")}
+          className="text-muted-foreground max-w-3xl"
+          onSave={(value) => console.log("Saving:", value)}
+        />
       </section>
 
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -84,24 +89,29 @@ const Certificates = () => {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div className="overflow-hidden">
-              <img 
+              <EditableImage 
                 src={certificate.image} 
                 alt={certificate.title} 
                 className="certificate-image"
+                onSave={(file) => {
+                  console.log("Saving image:", file);
+                  return Promise.resolve(URL.createObjectURL(file));
+                }}
               />
             </div>
             
             <div className="p-4">
-              <h3 className="font-medium text-lg">{certificate.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{certificate.date}</p>
-              
-              <button
-                onClick={() => handleDownload(certificate.title)}
-                className="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border border-border bg-background hover:bg-background/80 transition-colors"
-              >
-                <Download className="h-4 w-4" />
-                <span>{t("download")}</span>
-              </button>
+              <EditableContent
+                as="h3"
+                initialValue={certificate.title}
+                className="font-medium text-lg"
+                onSave={(value) => console.log("Saving:", value)}
+              />
+              <EditableContent
+                initialValue={certificate.date}
+                className="text-sm text-muted-foreground"
+                onSave={(value) => console.log("Saving:", value)}
+              />
             </div>
           </div>
         ))}

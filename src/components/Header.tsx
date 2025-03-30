@@ -4,6 +4,8 @@ import ThemeToggle from "./ThemeToggle";
 import RotatingSlogan from "./RotatingSlogan";
 import Navigation from "./Navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import EditableImage from "./EditableImage";
+import EditableContent from "./EditableContent";
 
 const Header: React.FC = () => {
   const { t } = useLanguage();
@@ -20,11 +22,26 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="rounded-full overflow-hidden w-12 h-12 border-2 border-primary/50 flex items-center justify-center bg-background/80 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
-            <img src="https://sirajul26.imgix.net/logo2.gif" alt="MSI" className="w-full h-full object-cover" />
+            <EditableImage 
+              src="https://sirajul26.imgix.net/logo2.gif" 
+              alt="MSI" 
+              className="w-full h-full object-cover" 
+              id="header-logo"
+              onSave={(file) => {
+                console.log("Saving logo:", file);
+                return Promise.resolve(URL.createObjectURL(file));
+              }}
+            />
           </div>
           
           <div>
-            <h1 className="text-lg font-medium bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">MD Sirajul Islam</h1>
+            <EditableContent
+              as="h1"
+              initialValue="MD Sirajul Islam"
+              className="text-lg font-medium bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent"
+              id="header-name"
+              onSave={(value) => console.log("Saving name:", value)}
+            />
             <RotatingSlogan slogans={slogans} />
           </div>
         </div>
