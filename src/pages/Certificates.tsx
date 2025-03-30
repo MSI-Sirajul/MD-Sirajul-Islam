@@ -4,9 +4,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import EditableImage from "@/components/EditableImage";
 import EditableContent from "@/components/EditableContent";
 import { useEdit } from "@/contexts/EditContext";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 
 const Certificates = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { t } = useLanguage();
   const { isEditMode } = useEdit();
   
@@ -63,6 +66,12 @@ const Certificates = () => {
     }
   ];
 
+  const handleImageClick = (imageSrc: string) => {
+    if (!isEditMode) {
+      setSelectedImage(imageSrc);
+    }
+  };
+
   return (
     <div className="page-transition space-y-8">
       <section className="space-y-4">
@@ -88,11 +97,14 @@ const Certificates = () => {
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <div className="overflow-hidden">
+            <div 
+              className="overflow-hidden cursor-pointer"
+              onClick={() => handleImageClick(certificate.image)}
+            >
               <EditableImage 
                 src={certificate.image} 
                 alt={certificate.title} 
-                className="certificate-image"
+                className="certificate-image hover:scale-105 transition-transform"
                 onSave={(file) => {
                   console.log("Saving image:", file);
                   return Promise.resolve(URL.createObjectURL(file));
@@ -116,6 +128,24 @@ const Certificates = () => {
           </div>
         ))}
       </section>
+
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-[90vw] w-fit max-h-[90vh] p-0 border-none bg-transparent shadow-none">
+          <div className="relative">
+            <img 
+              src={selectedImage || ''} 
+              alt="Certificate Preview" 
+              className="max-h-[85vh] max-w-[85vw] object-contain rounded-lg"
+            />
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-2 right-2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
