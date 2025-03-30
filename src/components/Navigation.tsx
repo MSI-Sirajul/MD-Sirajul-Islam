@@ -1,9 +1,10 @@
 
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MoreVertical, X, Home, Cpu, Award, User, Globe, Type } from "lucide-react";
+import { MoreVertical, X, Home, Cpu, Award, User, Globe, Type, Edit, Save } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useFont, fontOptions } from "@/contexts/FontContext";
+import { useEdit } from "@/contexts/EditContext";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -12,6 +13,7 @@ const Navigation: React.FC = () => {
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
   const { font, setFont, currentFontName } = useFont();
+  const { isEditMode, toggleEditMode, saveChanges } = useEdit();
 
   const routes = [
     { name: t("home"), path: "/", icon: <Home className="h-4 w-4" /> },
@@ -58,6 +60,41 @@ const Navigation: React.FC = () => {
                 {route.name}
               </Link>
             ))}
+            
+            {/* Edit Mode Toggle */}
+            <button 
+              onClick={() => {
+                toggleEditMode();
+                setIsOpen(false);
+              }}
+              className="px-4 py-2 text-sm transition-colors hover:bg-primary/10 flex items-center gap-2 w-full text-left"
+            >
+              {isEditMode ? (
+                <>
+                  <Save className="h-4 w-4 text-green-500" />
+                  <span>{t("save_changes")}</span>
+                </>
+              ) : (
+                <>
+                  <Edit className="h-4 w-4 text-primary" />
+                  <span>{t("edit_mode")}</span>
+                </>
+              )}
+            </button>
+
+            {/* Save Changes Button (only visible in edit mode) */}
+            {isEditMode && (
+              <button 
+                onClick={() => {
+                  saveChanges();
+                  setIsOpen(false);
+                }}
+                className="px-4 py-2 text-sm bg-green-500/10 text-green-500 transition-colors hover:bg-green-500/20 flex items-center gap-2 w-full text-left"
+              >
+                <Save className="h-4 w-4" />
+                <span>{t("save_all")}</span>
+              </button>
+            )}
             
             <div className="border-t border-border/30 mt-2 pt-2">
               {/* Language Toggle */}

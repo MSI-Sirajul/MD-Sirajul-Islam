@@ -1,9 +1,14 @@
+
 import React from "react";
 import { Github, Linkedin, Mail, Facebook, Music, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useEdit } from "@/contexts/EditContext";
+import EditableContent from "@/components/EditableContent";
+import EditableImage from "@/components/EditableImage";
 
 const Index = () => {
   const { t } = useLanguage();
+  const { isEditMode } = useEdit();
 
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
@@ -29,31 +34,59 @@ const Index = () => {
     { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
   ];
 
+  // In the future, these handlers would update data in Supabase
+  const handleContentSave = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
+    // This is where we would save to Supabase
+  };
+
+  const handleImageSave = async (file: File) => {
+    console.log("Image to upload:", file);
+    // In the future, this would upload to Supabase Storage
+    // For now, we just return a temporary URL
+    return URL.createObjectURL(file);
+  };
+
   return (
     <div className="page-transition space-y-12">
       <section className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">{t("welcome")}</h2>
-          <p className="text-muted-foreground">
-            I'm a multi talented person, i'm a •student nurse •Professional Graphics Designer •Electrical engineer •Programmer.
-          </p>
+          <EditableContent
+            as="h2"
+            initialValue={t("welcome")}
+            className="text-3xl font-bold tracking-tight"
+            onSave={(value) => handleContentSave("welcome", value)}
+          />
+          <EditableContent
+            initialValue="I'm a multi talented person, i'm a •student nurse •Professional Graphics Designer •Electrical engineer •Programmer."
+            className="text-muted-foreground"
+            onSave={(value) => handleContentSave("intro", value)}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="glass-morphism rounded-2xl overflow-hidden h-80">
-            <img 
+            <EditableImage 
               src="https://sirajul26.imgix.net/msi-2.png" 
               alt="Banner" 
               className="w-full h-full object-cover"
+              onSave={handleImageSave}
             />
           </div>
           
           <div className="flex flex-col justify-between">
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">{t("about_me")}</h3>
-              <p className="text-muted-foreground">
-                {t("about_description")}
-              </p>
+              <EditableContent
+                as="h3"
+                initialValue={t("about_me")}
+                className="text-xl font-semibold"
+                onSave={(value) => handleContentSave("about_me", value)}
+              />
+              <EditableContent
+                initialValue={t("about_description")}
+                className="text-muted-foreground"
+                onSave={(value) => handleContentSave("about_description", value)}
+              />
             </div>
             
             <div className="flex gap-3 pt-4">
@@ -75,25 +108,53 @@ const Index = () => {
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight">{t("my_interests")}</h2>
+        <EditableContent
+          as="h2"
+          initialValue={t("my_interests")}
+          className="text-2xl font-semibold tracking-tight"
+          onSave={(value) => handleContentSave("my_interests", value)}
+        />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {hobbies.map((hobby) => (
+          {hobbies.map((hobby, index) => (
             <div key={hobby.title} className="p-6 glass-morphism rounded-xl hover-scale">
               <div className="text-4xl mb-3">{hobby.icon}</div>
-              <h3 className="text-lg font-medium">{hobby.title}</h3>
-              <p className="text-sm text-muted-foreground">{hobby.description}</p>
+              <EditableContent
+                as="h3"
+                initialValue={hobby.title}
+                className="text-lg font-medium"
+                onSave={(value) => handleContentSave(`hobby_${index}_title`, value)}
+              />
+              <EditableContent
+                initialValue={hobby.description}
+                className="text-sm text-muted-foreground"
+                onSave={(value) => handleContentSave(`hobby_${index}_description`, value)}
+              />
             </div>
           ))}
         </div>
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight">{t("activity_highlights")}</h2>
+        <EditableContent
+          as="h2"
+          initialValue={t("activity_highlights")}
+          className="text-2xl font-semibold tracking-tight"
+          onSave={(value) => handleContentSave("activity_highlights", value)}
+        />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {activities.map((activity) => (
+          {activities.map((activity, index) => (
             <div key={activity.title} className="p-6 glass-morphism rounded-xl">
-              <h3 className="text-lg font-medium">{activity.title}</h3>
-              <p className="text-sm text-muted-foreground">{activity.description}</p>
+              <EditableContent
+                as="h3"
+                initialValue={activity.title}
+                className="text-lg font-medium"
+                onSave={(value) => handleContentSave(`activity_${index}_title`, value)}
+              />
+              <EditableContent
+                initialValue={activity.description}
+                className="text-sm text-muted-foreground"
+                onSave={(value) => handleContentSave(`activity_${index}_description`, value)}
+              />
             </div>
           ))}
         </div>
