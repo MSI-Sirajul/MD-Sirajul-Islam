@@ -1,7 +1,8 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useEdit } from '@/contexts/EditContext';
 import { Camera, Loader2, Image } from 'lucide-react';
+import { supabase } from "@/integrations/supabase/client";
 
 type EditableImageProps = {
   src: string;
@@ -23,6 +24,27 @@ const EditableImage = ({
   const [isUploading, setIsUploading] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Load image from Supabase on first render
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const { data } = await supabase
+          .from('images')
+          .select('path')
+          .eq('key', id)
+          .maybeSingle();
+        
+        if (data && data.path) {
+          setCurrentSrc(data.path);
+        }
+      } catch (error) {
+        console.error(`Error fetching image for ${id}:`, error);
+      }
+    };
+
+    fetchImage();
+  }, [id]);
 
   const handleImageClick = () => {
     if (isEditMode && fileInputRef.current) {
@@ -47,6 +69,11 @@ const EditableImage = ({
       // If onSave prop is provided, also call that
       if (onSave) {
         await onSave(file);
+      }
+      
+      // Update to the real URL if different from the temp one
+      if (newUrl && newUrl !== objectUrl) {
+        setCurrentSrc(newUrl);
       }
     } catch (error) {
       console.error("Error uploading image:", error);

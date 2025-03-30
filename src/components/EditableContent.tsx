@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useEdit } from '@/contexts/EditContext';
+import { supabase } from "@/integrations/supabase/client";
 
 type EditableContentProps = {
   initialValue: string;
@@ -21,6 +22,27 @@ const EditableContent = ({
   const [content, setContent] = useState(initialValue);
   const { isEditMode, updateContent } = useEdit();
   const inputRef = useRef<HTMLDivElement>(null);
+
+  // Load content from Supabase on first render
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const { data } = await supabase
+          .from('content')
+          .select('value')
+          .eq('key', id)
+          .maybeSingle();
+        
+        if (data && data.value) {
+          setContent(data.value);
+        }
+      } catch (error) {
+        console.error(`Error fetching content for ${id}:`, error);
+      }
+    };
+
+    fetchContent();
+  }, [id]);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -48,14 +70,15 @@ const EditableContent = ({
     }
   };
 
-  const handleBlur = () => {
+  const handleBlur = async () => {
     if (isEditing) {
       setIsEditing(false);
       if (content !== initialValue) {
         if (onSave) {
           onSave(content);
         }
-        updateContent(id, content);
+        // Save to Supabase via context
+        await updateContent(id, content);
       }
     }
   };

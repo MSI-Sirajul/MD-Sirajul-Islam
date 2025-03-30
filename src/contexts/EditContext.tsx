@@ -37,7 +37,8 @@ export const EditProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const updateContent = (key: string, value: string) => {
+  // Save content change to Supabase and update local state
+  const updateContent = async (key: string, value: string) => {
     if (!isEditMode) return;
     
     setContentChanges(prev => ({
@@ -45,31 +46,177 @@ export const EditProvider = ({ children }: { children: ReactNode }) => {
       [key]: value
     }));
     
-    toast.info(`Updated "${key}" content. Don't forget to save!`);
+    try {
+      // Check if the content already exists
+      const { data: existingContent } = await supabase
+        .from('content')
+        .select('*')
+        .eq('key', key)
+        .single();
+      
+      if (existingContent) {
+        // Update existing content
+        await supabase
+          .from('content')
+          .update({ value, updated_at: new Date().toISOString() })
+          .eq('key', key);
+      } else {
+        // Insert new content
+        await supabase
+          .from('content')
+          .insert({ key, value });
+      }
+      
+      toast.success(`Updated "${key}" content.`);
+    } catch (error) {
+      console.error('Error saving content:', error);
+      toast.error(`Failed to save "${key}" content. It will be saved when you click "Save All".`);
+    }
   };
 
+  // Upload image to Supabase Storage and update database record
   const updateImage = async (path: string, file: File): Promise<string> => {
     if (!isEditMode) return '';
 
-    // In the future, this would upload to Supabase
-    // For now, just store the file reference
+    // Store file in imageChanges for bulk saving later if needed
     setImageChanges(prev => ({
       ...prev,
       [path]: file
     }));
 
-    toast.info(`Updated image at "${path}". Don't forget to save!`);
-    return URL.createObjectURL(file);
+    try {
+      // Generate a unique filename
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${path.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.${fileExt}`;
+      const filePath = `${fileName}`;
+      
+      // Upload the file to Supabase Storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('website-images')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: true
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      // Get the public URL
+      const { data: publicURL } = supabase.storage
+        .from('website-images')
+        .getPublicUrl(filePath);
+
+      // Update or insert record in the images table
+      const { data: existingImage } = await supabase
+        .from('images')
+        .select('*')
+        .eq('key', path)
+        .single();
+
+      if (existingImage) {
+        await supabase
+          .from('images')
+          .update({ 
+            path: publicURL.publicUrl,
+            updated_at: new Date().toISOString() 
+          })
+          .eq('key', path);
+      } else {
+        await supabase
+          .from('images')
+          .insert({ 
+            key: path, 
+            path: publicURL.publicUrl 
+          });
+      }
+
+      toast.success(`Uploaded image "${path}".`);
+      return publicURL.publicUrl;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast.error(`Failed to upload image. It will be saved when you click "Save All".`);
+      
+      // Return a temporary URL for preview
+      return URL.createObjectURL(file);
+    }
   };
 
   const saveChanges = async () => {
     toast.promise(
       async () => {
-        // In the future, this code would upload all images to Supabase Storage
-        // and save all content changes to the database
-        
-        // Simulate saving delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Process any remaining content changes
+        const contentPromises = Object.entries(contentChanges).map(async ([key, value]) => {
+          // Check if content exists
+          const { data: existingContent } = await supabase
+            .from('content')
+            .select('*')
+            .eq('key', key)
+            .maybeSingle();
+          
+          if (existingContent) {
+            // Update existing content
+            return supabase
+              .from('content')
+              .update({ value, updated_at: new Date().toISOString() })
+              .eq('key', key);
+          } else {
+            // Insert new content
+            return supabase
+              .from('content')
+              .insert({ key, value });
+          }
+        });
+
+        // Process any remaining image changes
+        const imagePromises = Object.entries(imageChanges).map(async ([path, file]) => {
+          // Generate a unique filename
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${path.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.${fileExt}`;
+          const filePath = `${fileName}`;
+          
+          // Upload the file to Supabase Storage
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('website-images')
+            .upload(filePath, file, {
+              cacheControl: '3600',
+              upsert: true
+            });
+
+          if (uploadError) throw uploadError;
+
+          // Get the public URL
+          const { data: publicURL } = supabase.storage
+            .from('website-images')
+            .getPublicUrl(filePath);
+
+          // Update or insert record in the images table
+          const { data: existingImage } = await supabase
+            .from('images')
+            .select('*')
+            .eq('key', path)
+            .maybeSingle();
+
+          if (existingImage) {
+            return supabase
+              .from('images')
+              .update({ 
+                path: publicURL.publicUrl,
+                updated_at: new Date().toISOString() 
+              })
+              .eq('key', path);
+          } else {
+            return supabase
+              .from('images')
+              .insert({ 
+                key: path, 
+                path: publicURL.publicUrl 
+              });
+          }
+        });
+
+        // Wait for all promises to resolve
+        await Promise.all([...contentPromises, ...imagePromises]);
 
         // Reset changes after successful save
         setContentChanges({});
@@ -78,9 +225,9 @@ export const EditProvider = ({ children }: { children: ReactNode }) => {
         setIsEditMode(false);
       },
       {
-        loading: 'Saving changes...',
-        success: 'All changes saved successfully!',
-        error: 'Failed to save changes. Please try again.',
+        loading: 'Saving all changes...',
+        success: 'All changes saved successfully to Supabase!',
+        error: 'Failed to save some changes. Please try again.',
       }
     );
   };
