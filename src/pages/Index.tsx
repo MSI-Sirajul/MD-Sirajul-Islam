@@ -67,7 +67,7 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="glass-morphism rounded-2xl overflow-hidden h-auto">
             <EditableImage
-              src="/src/pages/images/msi.jpg"
+              src="https://sirajul26.imgix.net/msi.jpg"
               alt="MD Sirajul Islam"
               className="w-full h-full object-cover"
               id="profile-image"
