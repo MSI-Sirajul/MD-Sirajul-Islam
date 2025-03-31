@@ -1,29 +1,14 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Github, Linkedin, Mail, Facebook, Music, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEdit } from "@/contexts/EditContext";
 import EditableContent from "@/components/EditableContent";
-
-// Add type declaration for the LinkedIn badge global variable
-declare global {
-  interface Window {
-    LI?: {
-      showBadge: () => void;
-    };
-  }
-}
+import EditableImage from "@/components/EditableImage";
 
 const Index = () => {
   const { t } = useLanguage();
   const { isEditMode } = useEdit();
-
-  useEffect(() => {
-    // This ensures the LinkedIn badge script is reloaded when component mounts
-    if (window.LI && window.LI.showBadge) {
-      window.LI.showBadge();
-    }
-  }, []);
 
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
@@ -80,24 +65,14 @@ const Index = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="glass-morphism rounded-2xl overflow-hidden h-auto p-4">
-            {/* LinkedIn Badge */}
-            <div 
-              className="badge-base LI-profile-badge" 
-              data-locale="en_US" 
-              data-size="large" 
-              data-theme="dark" 
-              data-type="VERTICAL" 
-              data-vanity="sirajul26" 
-              data-version="v1"
-            >
-              <a 
-                className="badge-base__link LI-simple-link" 
-                href="https://bd.linkedin.com/in/sirajul26?trk=profile-badge"
-              >
-                MD Sirajul Islam
-              </a>
-            </div>
+          <div className="glass-morphism rounded-2xl overflow-hidden h-auto">
+            <EditableImage
+              src="/src/pages/images/msi.jpg"
+              alt="MD Sirajul Islam"
+              className="w-full h-full object-cover"
+              id="profile-image"
+              onSave={handleImageSave}
+            />
           </div>
           
           <div className="flex flex-col justify-between">
