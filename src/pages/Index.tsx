@@ -1,8 +1,18 @@
+
 import React, { useEffect } from "react";
 import { Github, Linkedin, Mail, Facebook, Music, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEdit } from "@/contexts/EditContext";
 import EditableContent from "@/components/EditableContent";
+
+// Add type declaration for the LinkedIn badge global variable
+declare global {
+  interface Window {
+    LI?: {
+      showBadge: () => void;
+    };
+  }
+}
 
 const Index = () => {
   const { t } = useLanguage();
