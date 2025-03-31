@@ -1,3 +1,4 @@
+
 import React from "react";
 import { 
   Github, 
@@ -15,6 +16,8 @@ import {
   Award
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import EditableContent from "@/components/EditableContent";
 
 const About = () => {
   const { t } = useLanguage();
@@ -129,60 +132,101 @@ const About = () => {
               ))}
             </ul>
           </div>
+
+          {/* LinkedIn Badge */}
+          <div className="glass-morphism rounded-xl p-5 mt-6 overflow-hidden">
+            <h3 className="text-lg font-medium mb-4">LinkedIn Profile</h3>
+            <div className="flex flex-col items-center">
+              <div className="w-full">
+                <div className="linkedin-badge">
+                  <div className="badge-header bg-[#0077b5] p-3 rounded-t-lg">
+                    <Linkedin className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="badge-content p-4 bg-white rounded-b-lg text-center">
+                    <div className="badge-avatar mb-2">
+                      <img 
+                        src="https://sirajul26.imgix.net/msi.jpg" 
+                        alt="LinkedIn Profile" 
+                        className="w-16 h-16 rounded-full mx-auto border-2 border-[#0077b5]"
+                      />
+                    </div>
+                    <h4 className="text-gray-900 font-medium">MD Sirajul Islam</h4>
+                    <p className="text-sm text-gray-600 mb-2">Student Nurse | Graphics Designer</p>
+                    <a 
+                      href="https://bd.linkedin.com/in/sirajul26" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block px-4 py-2 bg-[#0077b5] text-white rounded-md text-sm font-medium hover:bg-[#00669c] transition-colors"
+                    >
+                      View Profile
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         
         <div className="md:w-2/3 space-y-8">
           <div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">MD Sirajul Islam</h1>
             <p className="text-muted-foreground">
-              I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer.
+              <EditableContent
+                id="about-intro"
+                initialValue="I'm a multi talented person, i'm a • student nurse (Health Care Provider) • Professional Graphics Designer • Electrical engineer • Programmer."
+              />
             </p>
           </div>
           
-          <div className="space-y-4">
-            <h2 className="text-2xl font-semibold">{t("about_me")}</h2>
-            <p className="text-muted-foreground">
-              I am a versatile professional with a unique combination of skills in healthcare, Graphics Design, programming, and electrical engineering. 
-              With a passion for innovation and problem-solving, I bridge the gap between healthcare and technology 
-              to create meaningful solutions that improve lives.
-            </p>
-            <p className="text-muted-foreground">
-              My background in nursing has given me deep insights into healthcare needs, while my engineering and 
-              programming expertise allows me to develop technical solutions. I'm also dedicated to cybersecurity, 
-              ensuring that digital systems remain secure and trustworthy.
-            </p>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Award className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">{t("experience")}</h2>
-            </div>
-            <div className="space-y-4">
-              {experiences.map((exp) => (
-                <div key={exp.title} className="glass-morphism rounded-xl p-4">
-                  <h3 className="font-medium">{exp.title}</h3>
-                  <p className="text-sm text-muted-foreground">{exp.company} | {exp.period}</p>
-                  <p className="text-sm mt-2">{exp.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-semibold">{t("education")}</h2>
-            </div>
-            <div className="space-y-3">
-              {education.map((edu) => (
-                <div key={edu.degree} className="glass-morphism rounded-xl p-4">
-                  <h3 className="font-medium">{edu.degree}</h3>
-                  <p className="text-sm text-muted-foreground">{edu.institution} | {edu.year}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Tabs defaultValue="about" className="w-full">
+            <TabsList className="grid grid-cols-3 mb-4">
+              <TabsTrigger value="about">About Me</TabsTrigger>
+              <TabsTrigger value="experience">Experience</TabsTrigger>
+              <TabsTrigger value="education">Education</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="about" className="space-y-4">
+              <EditableContent
+                id="about-me-1"
+                initialValue="I am a versatile professional with a unique combination of skills in healthcare, Graphics Design, programming, and electrical engineering. With a passion for innovation and problem-solving, I bridge the gap between healthcare and technology to create meaningful solutions that improve lives."
+              />
+              <EditableContent
+                id="about-me-2"
+                initialValue="My background in nursing has given me deep insights into healthcare needs, while my engineering and programming expertise allows me to develop technical solutions. I'm also dedicated to cybersecurity, ensuring that digital systems remain secure and trustworthy."
+              />
+            </TabsContent>
+
+            <TabsContent value="experience" className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Award className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-semibold">{t("experience")}</h2>
+              </div>
+              <div className="space-y-4">
+                {experiences.map((exp) => (
+                  <div key={exp.title} className="glass-morphism rounded-xl p-4">
+                    <h3 className="font-medium">{exp.title}</h3>
+                    <p className="text-sm text-muted-foreground">{exp.company} | {exp.period}</p>
+                    <p className="text-sm mt-2">{exp.description}</p>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="education" className="space-y-4">
+              <div className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-semibold">{t("education")}</h2>
+              </div>
+              <div className="space-y-3">
+                {education.map((edu) => (
+                  <div key={edu.degree} className="glass-morphism rounded-xl p-4">
+                    <h3 className="font-medium">{edu.degree}</h3>
+                    <p className="text-sm text-muted-foreground">{edu.institution} | {edu.year}</p>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
     </div>
