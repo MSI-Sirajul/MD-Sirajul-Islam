@@ -6,7 +6,7 @@ import { User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface ProfileButtonProps {
   userId: string;
@@ -21,6 +21,7 @@ interface ProfileData {
   signup_method: string;
   created_at: string;
   updated_at: string;
+  avatar_url?: string;
 }
 
 const ProfileButton = ({ userId }: ProfileButtonProps) => {
@@ -29,18 +30,30 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
   const { data: profile, isLoading } = useQuery({
     queryKey: ["profile", userId],
     queryFn: async () => {
-      // Use a direct SQL query with the from function to get around type issues
-      const { data, error } = await supabase
+      // Get user data from auth
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      
+      if (userError) {
+        throw new Error(userError.message);
+      }
+      
+      // Get profile data
+      const { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', userId)
         .single();
       
-      if (error) {
-        throw new Error(error.message);
+      if (profileError) {
+        throw new Error(profileError.message);
       }
       
-      return data as ProfileData;
+      // Combine user data with profile data
+      return { 
+        ...profileData, 
+        email: userData.user?.email,
+        avatar_url: userData.user?.user_metadata?.avatar_url
+      } as ProfileData;
     },
   });
 
@@ -85,6 +98,7 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
             <User className="h-5 w-5" />
           ) : (
             <Avatar className="h-8 w-8 border border-border">
+              <AvatarImage src={profile.avatar_url} />
               <AvatarFallback>{getInitials(profile.name || "")}</AvatarFallback>
             </Avatar>
           )}

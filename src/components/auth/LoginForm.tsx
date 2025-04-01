@@ -22,6 +22,7 @@ interface LoginFormProps {
 
 const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -64,6 +65,30 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/`,
+        }
+      });
+      
+      if (error) {
+        toast("Google sign in failed", {
+          description: error.message,
+        });
+      }
+    } catch (error) {
+      toast("An error occurred", {
+        description: "Please try again later",
+      });
+    } finally {
+      setIsGoogleLoading(false);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <Form {...form}>
@@ -101,6 +126,27 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
           </Button>
         </form>
       </Form>
+      
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">
+            Or continue with
+          </span>
+        </div>
+      </div>
+      
+      <Button 
+        variant="outline" 
+        type="button" 
+        className="w-full" 
+        onClick={handleGoogleSignIn}
+        disabled={isGoogleLoading}
+      >
+        {isGoogleLoading ? "Loading..." : "Google"}
+      </Button>
     </div>
   );
 };
