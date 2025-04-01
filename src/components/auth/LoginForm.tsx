@@ -50,7 +50,6 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
       if (error) {
         toast("Login failed", {
           description: error.message,
-          variant: "destructive",
         });
         return;
       }
@@ -59,7 +58,6 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     } catch (error) {
       toast("An error occurred", {
         description: "Please try again later",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -83,13 +81,11 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
       if (error) {
         toast("Google sign in failed", {
           description: error.message,
-          variant: "destructive",
         });
       }
     } catch (error) {
       toast("An error occurred", {
         description: "Please try again later",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -109,13 +105,11 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
       if (error) {
         toast("Facebook sign in failed", {
           description: error.message,
-          variant: "destructive",
         });
       }
     } catch (error) {
       toast("An error occurred", {
         description: "Please try again later",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);

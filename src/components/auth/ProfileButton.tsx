@@ -29,14 +29,13 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
   const { data: profile, isLoading } = useQuery({
     queryKey: ["profile", userId],
     queryFn: async () => {
-      // This is using a raw SQL query instead of .from('profiles') to work around the type issue
-      const { data, error } = await supabase
-        .rpc('get_profile_by_id', { user_id: userId });
-
+      // Use the RPC function to get the profile
+      const { data, error } = await supabase.rpc('get_profile_by_id', { user_id: userId });
+      
       if (error) {
         throw new Error(error.message);
       }
-
+      
       return data as ProfileData;
     },
   });
@@ -47,7 +46,6 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
     if (error) {
       toast("Sign out failed", {
         description: error.message,
-        variant: "destructive",
       });
       return;
     }

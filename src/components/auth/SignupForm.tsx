@@ -60,7 +60,6 @@ const SignupForm = ({ onSuccess }: SignupFormProps) => {
       if (error) {
         toast("Signup failed", {
           description: error.message,
-          variant: "destructive",
         });
         return;
       }
@@ -72,7 +71,6 @@ const SignupForm = ({ onSuccess }: SignupFormProps) => {
     } catch (error) {
       toast("An error occurred", {
         description: "Please try again later",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -96,13 +94,11 @@ const SignupForm = ({ onSuccess }: SignupFormProps) => {
       if (error) {
         toast("Google sign up failed", {
           description: error.message,
-          variant: "destructive",
         });
       }
     } catch (error) {
       toast("An error occurred", {
         description: "Please try again later",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -122,13 +118,11 @@ const SignupForm = ({ onSuccess }: SignupFormProps) => {
       if (error) {
         toast("Facebook sign up failed", {
           description: error.message,
-          variant: "destructive",
         });
       }
     } catch (error) {
       toast("An error occurred", {
         description: "Please try again later",
-        variant: "destructive",
       });
     } finally {
       setIsLoading(false);

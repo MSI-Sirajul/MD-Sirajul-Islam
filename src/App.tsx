@@ -12,6 +12,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import { EditProvider } from "./contexts/EditContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import ShowAfterDelay from "./components/auth/ShowAfterDelay";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
         <EditProvider>
           <Toaster />
           <Sonner />
+          <ShowAfterDelay />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
