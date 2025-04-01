@@ -29,8 +29,12 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
   const { data: profile, isLoading } = useQuery({
     queryKey: ["profile", userId],
     queryFn: async () => {
-      // Use the RPC function to get the profile
-      const { data, error } = await supabase.rpc('get_profile_by_id', { user_id: userId });
+      // Use a direct SQL query with the from function to get around type issues
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
       
       if (error) {
         throw new Error(error.message);
