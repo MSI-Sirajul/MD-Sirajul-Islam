@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
@@ -12,24 +12,32 @@ interface ProfileButtonProps {
   userId: string;
 }
 
+interface ProfileData {
+  id: string;
+  name: string;
+  username: string | null;
+  email?: string;
+  phone_number: string | null;
+  signup_method: string;
+  created_at: string;
+  updated_at: string;
+}
+
 const ProfileButton = ({ userId }: ProfileButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
 
   const { data: profile, isLoading } = useQuery({
     queryKey: ["profile", userId],
     queryFn: async () => {
+      // This is using a raw SQL query instead of .from('profiles') to work around the type issue
       const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", userId)
-        .single();
+        .rpc('get_profile_by_id', { user_id: userId });
 
       if (error) {
         throw new Error(error.message);
       }
 
-      return data;
+      return data as ProfileData;
     },
   });
 
@@ -53,11 +61,13 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
 
   const getInitials = (name: string) => {
     return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+      ? name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+          .slice(0, 2)
+      : "U";
   };
 
   return (
@@ -73,7 +83,7 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
             <User className="h-5 w-5" />
           ) : (
             <Avatar className="h-8 w-8 border border-border">
-              <AvatarFallback>{getInitials(profile.name)}</AvatarFallback>
+              <AvatarFallback>{getInitials(profile.name || "")}</AvatarFallback>
             </Avatar>
           )}
         </Button>

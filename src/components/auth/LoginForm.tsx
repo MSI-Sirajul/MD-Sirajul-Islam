@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { supabase } from "@/integrations/supabase/client";
 import { Facebook, Mail } from "lucide-react";
-import { useToast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   identifier: z.string().min(1, { message: "Email, phone or username is required" }),
@@ -23,7 +22,6 @@ interface LoginFormProps {
 
 const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
   
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),

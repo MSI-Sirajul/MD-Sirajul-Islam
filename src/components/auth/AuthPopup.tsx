@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
-import { useToast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 export type AuthMode = "login" | "signup";
 
@@ -15,7 +15,6 @@ interface AuthPopupProps {
 
 const AuthPopup = ({ isOpen, onOpenChange }: AuthPopupProps) => {
   const [mode, setMode] = useState<AuthMode>("login");
-  const { toast } = useToast();
   
   const toggleMode = () => {
     setMode(mode === "login" ? "signup" : "login");

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { supabase } from "@/integrations/supabase/client";
 import { Facebook } from "lucide-react";
-import { useToast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 const signupSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -30,7 +29,6 @@ interface SignupFormProps {
 
 const SignupForm = ({ onSuccess }: SignupFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { toast } = useToast();
 
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
@@ -92,9 +90,6 @@ const SignupForm = ({ onSuccess }: SignupFormProps) => {
             access_type: 'offline',
             prompt: 'consent',
           },
-          data: {
-            signup_method: "google",
-          },
         },
       });
 
@@ -121,9 +116,6 @@ const SignupForm = ({ onSuccess }: SignupFormProps) => {
         provider: 'facebook',
         options: {
           redirectTo: window.location.origin,
-          data: {
-            signup_method: "facebook",
-          },
         },
       });
 
