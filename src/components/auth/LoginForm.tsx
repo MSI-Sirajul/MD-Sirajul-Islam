@@ -38,18 +38,26 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     setLoginError("");
     
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      console.log("Attempting to sign in with:", values.email);
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
 
       if (error) {
+        console.error("Login error:", error.message);
         setLoginError("Invalid login credentials. Only authorized administrators can access this site.");
         return;
       }
       
-      onSuccess();
+      if (data.user) {
+        console.log("Login successful:", data.user.email);
+        onSuccess();
+      } else {
+        setLoginError("No user data returned. Please try again.");
+      }
     } catch (error) {
+      console.error("Unexpected error during login:", error);
       setLoginError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);

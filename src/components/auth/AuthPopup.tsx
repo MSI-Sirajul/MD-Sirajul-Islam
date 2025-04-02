@@ -19,16 +19,16 @@ const AuthPopup = ({ isOpen, onOpenChange }: AuthPopupProps) => {
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-4 py-2 pb-4">
+        <div className="py-2 pb-4">
           <LoginForm onSuccess={() => {
             onOpenChange(false);
             toast("Login successful", {
-              description: "Welcome back!",
+              description: "Welcome back, admin!",
             });
           }} />
           
-          <div className="text-center text-sm text-muted-foreground">
-            Only authorized administrators can access and edit this site.
+          <div className="text-center text-sm text-muted-foreground mt-4">
+            Only authorized administrators can access this site.
           </div>
         </div>
       </DialogContent>
