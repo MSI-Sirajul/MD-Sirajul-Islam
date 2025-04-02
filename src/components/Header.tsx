@@ -11,7 +11,7 @@ import ProfileButton from "./auth/ProfileButton";
 
 const Header: React.FC = () => {
   const { t } = useLanguage();
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
   
   const slogans = [
     t("Student Nurse"),
@@ -50,9 +50,7 @@ const Header: React.FC = () => {
         </div>
         
         <div className="flex items-center gap-4">
-          {!isLoading && user && (
-            <ProfileButton userId={user.id} />
-          )}
+          <ProfileButton userId={user?.id} />
           <ThemeToggle />
           <Navigation />
         </div>

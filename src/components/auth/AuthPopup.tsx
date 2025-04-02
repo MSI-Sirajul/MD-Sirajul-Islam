@@ -28,7 +28,7 @@ const AuthPopup = ({ isOpen, onOpenChange }: AuthPopupProps) => {
           }} />
           
           <div className="text-center text-sm text-muted-foreground">
-            Only authorized administrators can login and edit this site.
+            Only authorized administrators can access and edit this site.
           </div>
         </div>
       </DialogContent>

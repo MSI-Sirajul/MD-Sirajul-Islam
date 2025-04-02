@@ -1,30 +1,16 @@
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Github, Linkedin, Mail, Facebook, Music, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEdit } from "@/contexts/EditContext";
 import EditableContent from "@/components/EditableContent";
 import EditableImage from "@/components/EditableImage";
-import AuthPopup from "@/components/auth/AuthPopup";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const { t } = useLanguage();
   const { isEditMode } = useEdit();
   const { user } = useAuth();
-  const [showAuthPopup, setShowAuthPopup] = useState(false);
-
-  // Show auth popup after 10 seconds if user is not logged in
-  useEffect(() => {
-    if (!user) {
-      const timer = setTimeout(() => {
-        setShowAuthPopup(true);
-      }, 10000); // 10 seconds
-      
-      return () => clearTimeout(timer);
-    }
-  }, [user]);
-
+  
   const socialLinks = [
     { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
     { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
@@ -49,7 +35,6 @@ const Index = () => {
     { title: t("ethical_hacking"), description: "Discovering security vulnerabilities", icon: "🔐" }
   ];
 
-  // In the future, these handlers would update data in Supabase
   const handleContentSave = (field: string, value: string) => {
     console.log(`Saving ${field}:`, value);
     // This is where we would save to Supabase
@@ -175,12 +160,6 @@ const Index = () => {
           ))}
         </div>
       </section>
-
-      {/* Auth popup that shows after 10 seconds if not logged in */}
-      <AuthPopup 
-        isOpen={showAuthPopup} 
-        onOpenChange={setShowAuthPopup} 
-      />
     </div>
   );
 };
