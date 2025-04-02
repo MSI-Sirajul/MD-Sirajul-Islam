@@ -1,13 +1,5 @@
-
 import React from "react";
 import { 
-  Github, 
-  Linkedin,
-  Music,
-  Twitter, 
-  Instagram,
-  MessageCircle,
-  Facebook,
   Mail, 
   Phone, 
   MapPin, 
@@ -23,11 +15,11 @@ const About = () => {
   const { t } = useLanguage();
   
   const socialLinks = [
-    { name: "GitHub", icon: <Github className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
-    { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
-    { name: "Facebook", icon: <Facebook className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
-    { name: "Telegram", icon: <MessageCircle className="h-5 w-5" />, url: "https://t.me/tech_master26" },
-    { name: "Tiktok", icon: <Music className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" }
+    { name: "GitHub", icon: <img src="https://sirajul16.imgix.net/github.png" alt="GitHub" className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
+    { name: "LinkedIn", icon: <img src="https://sirajul16.imgix.net/linkdin1.png" alt="LinkedIn" className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
+    { name: "Facebook", icon: <img src="https://sirajul16.imgix.net/facebook1.png" alt="Facebook" className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
+    { name: "Telegram", icon: <img src="https://sirajul16.imgix.net/tele1.png" alt="Telegram" className="h-5 w-5" />, url: "https://t.me/tech_master26" },
+    { name: "Tiktok", icon: <img src="https://sirajul16.imgix.net/tiktok1.png" alt="TikTok" className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" }
   ];
 
   const contactInfo = [
@@ -133,7 +125,6 @@ const About = () => {
             </ul>
           </div>
 
-          {/* LinkedIn Badge */}
           <div className="glass-morphism rounded-xl p-5 mt-6 overflow-hidden">
             <h3 className="text-lg font-medium mb-4">LinkedIn Profile</h3>
             <div className="flex flex-col items-center">

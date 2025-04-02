@@ -39,22 +39,57 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
     
     try {
       console.log("Attempting to sign in with:", values.email);
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: values.email,
-        password: values.password,
-      });
-
-      if (error) {
-        console.error("Login error:", error.message);
-        setLoginError("Invalid login credentials. Please check your email and password.");
-        return;
-      }
       
-      if (data.user) {
-        console.log("Login successful:", data.user.email);
-        onSuccess();
+      // Check for the hardcoded admin credentials
+      if (values.email === "admin@sirajul.com" && values.password === "29744516") {
+        // Try to sign in with Supabase
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: values.email,
+          password: values.password,
+        });
+
+        if (error) {
+          console.error("Login error with admin credentials:", error.message);
+          
+          // If the user doesn't exist yet in Supabase, try to create it
+          const { error: signUpError } = await supabase.auth.signUp({
+            email: values.email,
+            password: values.password,
+          });
+
+          if (signUpError) {
+            console.error("Failed to create admin account:", signUpError.message);
+            setLoginError("Failed to authenticate. Please contact the site administrator.");
+            return;
+          }
+          
+          // Try signing in again after creating the account
+          const { data: newData, error: newError } = await supabase.auth.signInWithPassword({
+            email: values.email,
+            password: values.password,
+          });
+          
+          if (newError) {
+            console.error("Still cannot sign in after account creation:", newError.message);
+            setLoginError("Authentication failed. Please try again later.");
+            return;
+          }
+          
+          console.log("Admin account created and signed in:", newData.user?.email);
+          onSuccess();
+          return;
+        }
+        
+        if (data.user) {
+          console.log("Admin login successful:", data.user.email);
+          onSuccess();
+          return;
+        }
       } else {
-        setLoginError("No user data returned. Please try again.");
+        console.error("Invalid admin credentials provided");
+        setLoginError("Invalid administrator credentials. Only authorized administrators can access this site.");
+        setIsLoading(false);
+        return;
       }
     } catch (error) {
       console.error("Unexpected error during login:", error);

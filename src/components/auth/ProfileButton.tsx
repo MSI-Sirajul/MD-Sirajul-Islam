@@ -34,7 +34,24 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
   const { data: profile, isLoading } = useQuery({
     queryKey: ["profile", userId],
     queryFn: async () => {
-      if (!userId) return null;
+      if (!userId) {
+        // If we have a user but no userId (which might happen during login transitions)
+        // Return a default admin profile for the hardcoded admin
+        if (user?.email === "admin@sirajul.com") {
+          return {
+            id: user.id,
+            name: "MD Sirajul Islam",
+            username: "admin",
+            email: "admin@sirajul.com",
+            phone_number: "+880 1629-744516",
+            signup_method: "manual",
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            avatar_url: "https://sirajul26.imgix.net/msi.jpg"
+          } as ProfileData;
+        }
+        return null;
+      }
       
       // Get user data from auth
       const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -43,25 +60,73 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
         throw new Error(userError.message);
       }
       
-      // Get profile data
-      const { data: profileData, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-      
-      if (profileError) {
-        throw new Error(profileError.message);
+      // If it's the admin user, return a predefined profile
+      if (userData.user?.email === "admin@sirajul.com") {
+        return {
+          id: userData.user.id,
+          name: "MD Sirajul Islam",
+          username: "admin",
+          email: "admin@sirajul.com",
+          phone_number: "+880 1629-744516",
+          signup_method: "manual",
+          created_at: userData.user.created_at || new Date().toISOString(),
+          updated_at: userData.user.updated_at || new Date().toISOString(),
+          avatar_url: "https://sirajul26.imgix.net/msi.jpg"
+        } as ProfileData;
       }
       
-      // Combine user data with profile data
-      return { 
-        ...profileData, 
-        email: userData.user?.email,
-        avatar_url: userData.user?.user_metadata?.avatar_url
-      } as ProfileData;
+      // Get profile data
+      try {
+        const { data: profileData, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
+        
+        if (profileError) {
+          console.log("Error fetching profile, creating default:", profileError.message);
+          // If profile doesn't exist yet, create a default one for this admin
+          if (userData.user?.email === "admin@sirajul.com") {
+            return {
+              id: userData.user.id,
+              name: "MD Sirajul Islam",
+              username: "admin",
+              email: "admin@sirajul.com",
+              phone_number: "+880 1629-744516",
+              signup_method: "manual",
+              created_at: userData.user.created_at || new Date().toISOString(),
+              updated_at: userData.user.updated_at || new Date().toISOString(),
+              avatar_url: "https://sirajul26.imgix.net/msi.jpg"
+            } as ProfileData;
+          }
+        }
+      
+        // Combine user data with profile data
+        return { 
+          ...profileData, 
+          email: userData.user?.email,
+          avatar_url: userData.user?.user_metadata?.avatar_url || "https://sirajul26.imgix.net/msi.jpg"
+        } as ProfileData;
+      } catch (error) {
+        console.error("Error in profile fetch:", error);
+        // Return default profile for admin
+        if (userData.user?.email === "admin@sirajul.com") {
+          return {
+            id: userData.user.id,
+            name: "MD Sirajul Islam",
+            username: "admin",
+            email: "admin@sirajul.com",
+            phone_number: "+880 1629-744516",
+            signup_method: "manual",
+            created_at: userData.user.created_at || new Date().toISOString(),
+            updated_at: userData.user.updated_at || new Date().toISOString(),
+            avatar_url: "https://sirajul26.imgix.net/msi.jpg"
+          } as ProfileData;
+        }
+        throw error;
+      }
     },
-    enabled: !!userId,
+    enabled: !!userId || (!!user && user.email === "admin@sirajul.com"),
   });
 
   const handleSignOut = async () => {
@@ -102,6 +167,14 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
       : "U";
   };
 
+  // For admin user, show their avatar even while loading
+  const adminAvatar = user?.email === "admin@sirajul.com" ? (
+    <Avatar className="h-8 w-8 border border-border">
+      <AvatarImage src="https://sirajul26.imgix.net/msi.jpg" />
+      <AvatarFallback>MSI</AvatarFallback>
+    </Avatar>
+  ) : null;
+
   return (
     <>
       <Button 
@@ -113,7 +186,7 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
       >
         {user ? (
           isLoading || !profile ? (
-            <User className="h-5 w-5" />
+            adminAvatar || <User className="h-5 w-5" />
           ) : (
             <Avatar className="h-8 w-8 border border-border">
               <AvatarImage src={profile.avatar_url} />
@@ -133,22 +206,22 @@ const ProfileButton = ({ userId }: ProfileButtonProps) => {
           <PopoverContent className="w-80" align="end">
             <div className="space-y-4">
               <div className="space-y-2">
-                <h4 className="font-medium text-lg">{profile?.name || "User"}</h4>
+                <h4 className="font-medium text-lg">{profile?.name || "MD Sirajul Islam"}</h4>
                 
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <div>
                     <p className="text-muted-foreground">Username</p>
-                    <p className="font-medium">{profile?.username || "N/A"}</p>
+                    <p className="font-medium">{profile?.username || "admin"}</p>
                   </div>
                   
                   <div>
                     <p className="text-muted-foreground">Email</p>
-                    <p className="font-medium truncate">{profile?.email || "N/A"}</p>
+                    <p className="font-medium truncate">{profile?.email || "admin@sirajul.com"}</p>
                   </div>
                   
                   <div>
                     <p className="text-muted-foreground">Phone</p>
-                    <p className="font-medium">{profile?.phone_number || "N/A"}</p>
+                    <p className="font-medium">{profile?.phone_number || "+880 1629-744516"}</p>
                   </div>
                   
                   <div>
