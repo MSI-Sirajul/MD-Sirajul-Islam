@@ -8,9 +8,11 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const loginSchema = z.object({
-  identifier: z.string().min(1, { message: "Email, phone or username is required" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(1, { message: "Password is required" }),
 });
 
@@ -23,43 +25,34 @@ interface LoginFormProps {
 const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
   
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      identifier: "",
+      email: "",
       password: "",
     },
   });
 
   const onSubmit = async (values: LoginFormValues) => {
     setIsLoading(true);
+    setLoginError("");
+    
     try {
-      // Check if identifier is an email
-      const isEmail = values.identifier.includes('@');
-      
-      const { error } = isEmail 
-        ? await supabase.auth.signInWithPassword({
-            email: values.identifier,
-            password: values.password,
-          })
-        : await supabase.auth.signInWithPassword({
-            phone: values.identifier,
-            password: values.password,
-          });
+      const { error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
 
       if (error) {
-        toast("Login failed", {
-          description: error.message,
-        });
+        setLoginError("Invalid login credentials. Only authorized administrators can access this site.");
         return;
       }
       
       onSuccess();
     } catch (error) {
-      toast("An error occurred", {
-        description: "Please try again later",
-      });
+      setLoginError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -67,6 +60,8 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
   const handleGoogleSignIn = async () => {
     setIsGoogleLoading(true);
+    setLoginError("");
+    
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -76,14 +71,10 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
       });
       
       if (error) {
-        toast("Google sign in failed", {
-          description: error.message,
-        });
+        setLoginError("Google sign in failed. Please try again.");
       }
     } catch (error) {
-      toast("An error occurred", {
-        description: "Please try again later",
-      });
+      setLoginError("An unexpected error occurred. Please try again.");
     } finally {
       setIsGoogleLoading(false);
     }
@@ -91,16 +82,23 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
   return (
     <div className="space-y-4">
+      {loginError && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{loginError}</AlertDescription>
+        </Alert>
+      )}
+      
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
-            name="identifier"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email, Phone or Username</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your email, phone or username" {...field} />
+                  <Input type="email" placeholder="Enter your admin email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

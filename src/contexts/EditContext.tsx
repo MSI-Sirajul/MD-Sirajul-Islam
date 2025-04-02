@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from './AuthContext';
 
 type EditContextType = {
   isEditMode: boolean;
@@ -18,8 +19,17 @@ export const EditProvider = ({ children }: { children: ReactNode }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [contentChanges, setContentChanges] = useState<Record<string, string>>({});
   const [imageChanges, setImageChanges] = useState<Record<string, File>>({});
+  const { user } = useAuth();
 
   const toggleEditMode = () => {
+    // Only allow logged-in users to enter edit mode
+    if (!user && !isEditMode) {
+      toast.error("Access denied", {
+        description: "You must be logged in as an administrator to edit this site."
+      });
+      return;
+    }
+    
     setIsEditMode(prev => !prev);
     if (!isEditMode) {
       toast.info("Edit mode enabled. Click on text or images to edit.");
