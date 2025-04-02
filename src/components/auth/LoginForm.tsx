@@ -46,7 +46,7 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
 
       if (error) {
         console.error("Login error:", error.message);
-        setLoginError("Invalid login credentials. Only authorized administrators can access this site.");
+        setLoginError("Invalid login credentials. Please check your email and password.");
         return;
       }
       
