@@ -12,12 +12,12 @@ const Index = () => {
   const { user } = useAuth();
   
   const socialLinks = [
-    { name: "GitHub", icon: <img src="https://sirajul16.imgix.net/github.png" alt="GitHub" className="h-5 w-5" />, url: "https://github.com/MSI-Sirajul/" },
-    { name: "LinkedIn", icon: <img src="https://sirajul16.imgix.net/linkdin1.png" alt="LinkedIn" className="h-5 w-5" />, url: "https://bd.linkedin.com/in/sirajul26" },
-    { name: "TikTok", icon: <img src="https://sirajul16.imgix.net/tiktok1.png" alt="TikTok" className="h-5 w-5" />, url: "https://www.tiktok.com/@feelings_for_u/" },
-    { name: "Facebook", icon: <img src="https://sirajul16.imgix.net/facebook1.png" alt="Facebook" className="h-5 w-5" />, url: "https://facebook.com/TS.Sirajul26/" },
-    { name: "Telegram", icon: <img src="https://sirajul16.imgix.net/tele1.png" alt="Telegram" className="h-5 w-5" />, url: "https://t.me/tech_master26" },
-    { name: "Email", icon: <img src="https://sirajul16.imgix.net/gmail.png" alt="Email" className="h-5 w-5" />, url: "mailto:sirajul4516@gmail.com" },
+    { name: "GitHub", icon: <img src="https://sirajul16.imgix.net/github.png" alt="GitHub" className="h-8 w-8" />, url: "https://github.com/MSI-Sirajul/" },
+    { name: "LinkedIn", icon: <img src="https://sirajul16.imgix.net/linkdin1.png" alt="LinkedIn" className="h-8 w-8" />, url: "https://bd.linkedin.com/in/sirajul26" },
+    { name: "TikTok", icon: <img src="https://sirajul16.imgix.net/tiktok1.png" alt="TikTok" className="h-8 w-8" />, url: "https://www.tiktok.com/@itz_sirajul26" },
+    { name: "Facebook", icon: <img src="https://sirajul16.imgix.net/facebook1.png" alt="Facebook" className="h-8 w-8" />, url: "https://facebook.com/TS.Sirajul26/" },
+    { name: "Telegram", icon: <img src="https://sirajul16.imgix.net/tele1.png" alt="Telegram" className="h-8 w-8" />, url: "https://t.me/tech_master26" },
+    { name: "Email", icon: <img src="https://sirajul16.imgix.net/gmail.png" alt="Email" className="h-8 w-8" />, url: "mailto:sirajul4516@gmail.com" },
   ];
 
   const activities = [
