@@ -5,7 +5,8 @@ import {
   MapPin, 
   Calendar, 
   BookOpen,
-  Award
+  Award,
+  Linkedin
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
